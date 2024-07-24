@@ -32,7 +32,7 @@ Additionally, computational antigen epitopes prediction is further challenged as
 The following figure overviews ISPIPab's methodology and workflow: 
 
 
-![image](Media/ISPIPab_workflow.png)
+![image](Media/ISPIPab_workflow_1.png)
 
 
 <h3> Requirements: </h3>
