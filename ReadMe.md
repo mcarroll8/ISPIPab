@@ -15,9 +15,9 @@ __Results__
 
 ---
 
-| ![image](Media/HIV_GP120_ISPIPab.png)
-| --- | --- |
-| HIV-1 GP120 with the two experimentally identified epitopes (in pink). Panel A shows the antigen complex with ADCC-potent antibody N60-i3 Fab (PDB ID: 5KJR). while panel B shows the antigen complex with a broadly neutralizing antibody (PDB ID: 4JPW) The epitopal residues predicted by ISPIPab are clustered into Cluster 1 (red) and Cluster 2 (green) and compared with the experimentally identified epitopes (pink). | 
+![image](Media/HIV_GP120_ISPIPab.png)
+__Description__
+HIV-1 GP120 with the two experimentally identified epitopes (in pink). Panel A shows the antigen complex with ADCC-potent antibody N60-i3 Fab (PDB ID: 5KJR). while panel B shows the antigen complex with a broadly neutralizing antibody (PDB ID: 4JPW) The epitopal residues predicted by ISPIPab are clustered into Cluster 1 (red) and Cluster 2 (green) and compared with the experimentally identified epitopes (pink). | 
 
 ---
 <h3> Requirements: </h3>
@@ -112,6 +112,8 @@ Folder entitled with name of the predictor of interest will contain a sub-folder
 Kmeans_cluster folders will provide the predicted residues of each antigen belonging to clusters 1-5, as appplicable.
 
 Summary results CSV will provide the number of predicted residues as well as the number of residues in clusters 1-5, respectively.
+
+
 ---
 ### Updates:
 Please Consult the CHANGELOG.md for all updates
