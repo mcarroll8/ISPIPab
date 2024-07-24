@@ -16,13 +16,15 @@ __Results__
 ---
 
 ![image](Media/HIV_GP120_ISPIPab.png)
+
 __Description__
-HIV-1 GP120 with the two experimentally identified epitopes (in pink). Panel A shows the antigen complex with ADCC-potent antibody N60-i3 Fab (PDB ID: 5KJR). while panel B shows the antigen complex with a broadly neutralizing antibody (PDB ID: 4JPW) The epitopal residues predicted by ISPIPab are clustered into Cluster 1 (red) and Cluster 2 (green) and compared with the experimentally identified epitopes (pink). | 
+
+HIV-1 GP120 with the two experimentally identified epitopes (in pink). The figure on the left shows the antigen complex with ADCC-potent antibody N60-i3 Fab (PDB ID: 5KJR). while the figure on the right shows the antigen complex with a broadly neutralizing antibody (PDB ID: 4JPW) The epitopal residues predicted by ISPIPab are clustered into Cluster 1 (red) and Cluster 2 (green) and compared with the experimentally identified epitopes (pink).
 
 ---
 <h3> Requirements: </h3>
 
-* python3.7
+* Python 3.7
 
 <h3>Usage for ISPIPab Epitopal Residue Prediction: </h3>
 
