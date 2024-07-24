@@ -2,13 +2,12 @@
 
 <p> Manuscript by R. Viswanathan, M. Carroll, A. Roffe, J.E. Fajardo, A. Fiser </p>
 
-
 ---
 
 ### Abstract: 
 
 __Motivation__
-<p>Identifying antigen epitopes is essential in medical applications, such as immunodiagnostic reagent discovery, vaccine design, and drug development. Computational approaches can complement lowthroughput, time-consuming, and costly experimental determination of epitopes. Currently available prediction methods, however, have moderate success predicting epitopes, which limits their applicability. Epitope prediction is further complicated by the fact that multiple epitopes may be located on the same antigen and complete experimental data is often unavailable..</p>
+<p>Identifying antigen epitopes is essential in medical applications, such as immunodiagnostic reagent discovery, vaccine design, and drug development. Computational approaches can complement low-throughput, time-consuming, and costly experimental determination of epitopes. Currently available prediction methods, however, have moderate success predicting epitopes, which limits their applicability. Epitope prediction is further complicated by the fact that multiple epitopes may be located on the same antigen and complete experimental data is often unavailable.</p>
 
 __Results__
 <p> Here, we introduce the antigen epitope prediction program ISPIPab that combines information from two feature-based methods and a docking-based method. We demonstrate that ISPIPab outperforms each of its individual classifiers as well as other state-of-the-art methods, including those designed specifically for epitope prediction. By combining the prediction algorithm with hierarchical clustering, we show that we can effectively capture epitopes that align with available experimental data while also revealing additional novel targets for future experimental investigations. </p>
@@ -22,6 +21,20 @@ __Description__
 HIV-1 GP120 with the two experimentally identified epitopes (in pink). The figure on the left shows the antigen complex with ADCC-potent antibody N60-i3 Fab (PDB ID: 5KJR). while the figure on the right shows the antigen complex with a broadly neutralizing antibody (PDB ID: 4JPW) The epitopal residues predicted by ISPIPab are clustered into Cluster 1 (red) and Cluster 2 (green) and compared with the experimentally identified epitopes (pink).
 
 ---
+<h3> ISPIPab Overview: </h3>
+
+ISPIPab was developed using 111 non-redundant and diverse unbound antigen structures, 82 of which were used for training through three-fold CV and 29 of which were used for testing, with the input and output data available in this repository. ISPIPab applies its foundational work, ISPIP, combined with a hierarchical clustering methodology to improve antigen epitope prediction. We have previously shown that that the generic protein interface computational prediction is improve by using a combination of methods that rely on orthogonal structure-based properties of a query protein, combining and balancing both template-free and template-based features. 
+
+We further hypothesize in this work that ISPIPab, which presents an approach of combining two generic feature-based methods and a docking-based method, can improve antigen epitope prediction beyond other methods currently available, including those specially designed for epitope prediction. Furthermore, as shown by Liang et al. (2010) and Hu et al. (2014) meta-learning approaches have stronger B-cell epitope predictive performance than single classifiers. However, many previously published methods, including EPMeta, are unavailable for use.
+
+Additionally, computational antigen epitopes prediction is further challenged as antibody-antigen interactions can occur across multiple regions on the surface of an antigen of interest. While it remains unknown whether any region of an antigen’s surface can theoretically be targeted by antibodies, specific regions are targeted much more favorably during immune responses, an immunological phenomenon known as epitope immunodominance. Through ISPIPab's hierarchical clustering methodology, ISPIPab's predicted epitopal residues can be appropriately grouped into distinct epitope regions, allowing for the prediction of immunodominant and subdominant B-cell epitopes.
+
+The following figure overviews ISPIPab's methodology and workflow: 
+
+
+![image](Media/ISPIPab_workflow.png)
+
+
 <h3> Requirements: </h3>
 
 * Python 3.7
@@ -105,15 +118,33 @@ Output:
 
 <h3>Usage for ISPIPab Hierarchical Clustering: </h3>
 
+
+ISPIPab predictions should be performed first, prior to clustering.
+
+
+<h3> Requirements: </h3>
+
+* Python 3.7
+* ISPIPab bin_frame output file, which contains per-residue epitope probability score for ISPIPab as well as individual classifiers. 
+
+* Cutoff file (part of the initial ISPIPab prediciton input, listing the cutoff value for each antigen)
+* PDB files for antigens of interest (to obtain coordinate data)
+
 -INPUT:
-Follow guidance in lines 19-31 to provide input paths for ISPIPab results, cutoff file, PDB files, and desired output clustering directory
+Follow guidance in lines 19-31 of ISPIPab_clustering_script.py to provide necessary paths and directories for the script to find the ISPIPab prediction output, cutoff file, PDB files, and desired directory to output the hierarchical clustering results
 
 -OUTPUT:
-Folder entitled with name of the predictor of interest will contain a sub-folder entitled by PDB ID containing ISPIPab predicted epitopal residues, coordinates of each atom that comprise predicted residues, and geometric center of each predicted residue.
 
-Kmeans_cluster folders will provide the predicted residues of each antigen belonging to clusters 1-5, as appplicable.
+A dendrogram will be displayed that may be saved.
 
-Summary results CSV will provide the number of predicted residues as well as the number of residues in clusters 1-5, respectively.
+A local directory will be created to host the clustering results. A sub-directory will be created for each predictor of interest that the clustering is performed on.
+
+This first subdirectory will contain a second subdirectory with the name of each antigen of interest that was clustering is performed on. This subdirectory will contain a list of the predicted residues as well as coordinate data and geometric center data for each of the predicted residues.
+
+The first subdirectory (entitled by predictor name) will also contain additional subdirectories entitled "hierarchical_cluster_X" (where X is 1,2,3,4,or 5). 
+This will contain files entitled by the antigen name that list the specific residues that belong to cluster X.
+
+The summary results CSV will provide the number of predicted residues as well as the total number of residues in each cluster, in ascending order.
 
 
 ---

@@ -135,16 +135,16 @@ for item in folder_infile_1.iterdir():
                 residue = file.name.split(".")[0]
                 #CREATES NEW FOLDER WITH GEOMETRIC CENTER DATA
                 with open (f"{item}/{item.name}_unbound_averaged_results.txt", "a") as outfile:
-                    outfile.write(f"{residue}P.txt,{x_mean},{y_mean},{z_mean}\n")
+                    outfile.write(f"{residue}_Residue_Predicted,{x_mean},{y_mean},{z_mean}\n")
 
 
 
 #code supports up to five clusters in organizing data, though can be expanded below. our results show max of three clusters in formation of epitopes based on hierarchical clustering
-os.mkdir(f"{clustering_outfile}/{predictor}/kmeans_cluster_1")
-os.mkdir(f"{clustering_outfile}/{predictor}/kmeans_cluster_2")
-os.mkdir(f"{clustering_outfile}/{predictor}/kmeans_cluster_3")
-os.mkdir(f"{clustering_outfile}/{predictor}/kmeans_cluster_4")
-os.mkdir(f"{clustering_outfile}/{predictor}/kmeans_cluster_5")
+os.mkdir(f"{clustering_outfile}/{predictor}/hierarchical_cluster_1")
+os.mkdir(f"{clustering_outfile}/{predictor}/hierarchical_cluster_2")
+os.mkdir(f"{clustering_outfile}/{predictor}/hierarchical_cluster_3")
+os.mkdir(f"{clustering_outfile}/{predictor}/hierarchical_cluster_4")
+os.mkdir(f"{clustering_outfile}/{predictor}/hierarchical_cluster_5")
 
 
 
@@ -199,7 +199,7 @@ def cluster():
     plt.figure(figsize=(10, 7))
     plt.title(file_2.name)
     dend = shc.dendrogram(shc.linkage(data, method='ward'))
-    #plt.show()
+    plt.show()
 
     
     cluster1, cluster2, cluster3, cluster4, cluster5, data = getClusterList(oneli)
@@ -265,18 +265,18 @@ def averageXYZ(cluster1, cluster2, cluster3, cluster4, cluster5, data):
             for cluster in infile_4:
                 if cluster.strip().split(",")[0] == protein_name:
                     dynamic_cutoff = cluster.strip().split(",")[2]
-                    with open (f"{clustering_outfile}/{predictor}/kmeans_cluster_1/{protein_name}_{predictor}.txt", "a") as outfile_1:
+                    with open (f"{clustering_outfile}/{predictor}/hierarchical_cluster_1/{protein_name}_{predictor}.txt", "a") as outfile_1:
                         outfile_1.write(f"{string_clu1}")
-                    with open (f"{clustering_outfile}/{predictor}/kmeans_cluster_2/{protein_name}_{predictor}.txt", "a") as outfile_2:
+                    with open (f"{clustering_outfile}/{predictor}/hierarchical_cluster_2/{protein_name}_{predictor}.txt", "a") as outfile_2:
                         outfile_2.write(f"{string_clu2}")
-                    with open (f"{clustering_outfile}/{predictor}/kmeans_cluster_3/{protein_name}_{predictor}.txt", "a") as outfile_3:
+                    with open (f"{clustering_outfile}/{predictor}/hierarchical_cluster_3/{protein_name}_{predictor}.txt", "a") as outfile_3:
                         outfile_3.write(f"{string_clu3}")
-                    with open (f"{clustering_outfile}/{predictor}/kmeans_cluster_4/{protein_name}_{predictor}.txt", "a") as outfile_4:
+                    with open (f"{clustering_outfile}/{predictor}/hierarchical_cluster_4/{protein_name}_{predictor}.txt", "a") as outfile_4:
                         outfile_4.write(f"{string_clu4}")
-                    with open (f"{clustering_outfile}/{predictor}/kmeans_cluster_5/{protein_name}_{predictor}.txt", "a") as outfile_5:
+                    with open (f"{clustering_outfile}/{predictor}/hierarchical_cluster_5/{protein_name}_{predictor}.txt", "a") as outfile_5:
                         outfile_5.write(f"{string_clu5}")
                     #writing grand file, containing summary data of clustering for each protein within method of interest
-                    with open(f"{clustering_outfile}/{predictor}/{predictor}_kmeans_clustering_results.csv", "a") as outfile:
+                    with open(f"{clustering_outfile}/{predictor}/{predictor}_hierarchical_clustering_results.csv", "a") as outfile:
                         outfile.write(f"{protein},{dynamic_cutoff},{clu1_length},{clu2_length},{clu3_length},{clu4_length},{clu5_length}\n")
 #run clustering
 def main():
